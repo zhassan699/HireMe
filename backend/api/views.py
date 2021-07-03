@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from hero.models import Hero
 from client.models import Client
-from .models import Job
+from .models import Job,HiringRequest,AcceptedRequest
 from .serializer import *
 from rest_framework import viewsets
 
@@ -33,4 +33,29 @@ class JobsListApi(viewsets.generics.ListAPIView):
 class ClientGetApi(viewsets.generics.RetrieveAPIView):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
+
+class HiringListApi(viewsets.generics.ListAPIView):
+    serializer_class = HiringSerializer
+
+    def get_queryset(self):
+        queryset = HiringRequest.objects.all()
+        hero = self.request.query_params.get('hero_id',None)
+
+        if hero is not None:
+            queryset = HiringRequest.objects.filter(hero_id=hero)
+
+        return queryset
+
+
+class AcceptedListApi(viewsets.generics.ListAPIView):
+    serializer_class = AcceptedSerializer
+
+    def get_queryset(self):
+        queryset = AcceptedRequest.objects.all()
+        hero = self.request.query_params.get('hero_id',None)
+        client = self.request.query_params.get('client_id',None)
+        if hero and client is not None:
+            queryset = AcceptedRequest.objects.filter(hero_id=hero).filter(client_id=client)
+
+        return queryset
 

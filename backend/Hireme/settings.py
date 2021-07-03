@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # local_apps
+    'client.apps.ClientConfig',
+    'hero.apps.HeroConfig',
+    'api.apps.ApiConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,11 +47,6 @@ INSTALLED_APPS = [
 
     # Third_Party
     'rest_framework',
-
-    # local_apps
-    'hero.apps.HeroConfig',
-    'client.apps.ClientConfig',
-    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [

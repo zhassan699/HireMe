@@ -20,7 +20,9 @@ from api.views import (
 HeroListApi,
 HeroGetApi,
 JobsListApi,
-ClientGetApi
+ClientGetApi,
+AcceptedListApi,
+HiringListApi,
 )
 
 # router = routers.DefaultRouter()
@@ -31,9 +33,11 @@ ClientGetApi
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('heros',HeroListApi.as_view()),
+    path('heros/',HeroListApi.as_view()),
     path('hero/<int:pk>/',HeroGetApi.as_view()),
     path('user/<int:pk>/',ClientGetApi.as_view()),
-    path('jobs',JobsListApi.as_view()),
+    path('jobs/',JobsListApi.as_view()),
+    path('hirings/',HiringListApi.as_view()),
+    path('acceptance/',AcceptedListApi.as_view()),
 
 ]
